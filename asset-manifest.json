@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/apes-aiding-apes/static/css/main.fa79b8ea.chunk.css",
+    "main.js": "/apes-aiding-apes/static/js/main.f10d00bf.chunk.js",
+    "main.js.map": "/apes-aiding-apes/static/js/main.f10d00bf.chunk.js.map",
+    "runtime-main.js": "/apes-aiding-apes/static/js/runtime-main.86c25619.js",
+    "runtime-main.js.map": "/apes-aiding-apes/static/js/runtime-main.86c25619.js.map",
+    "static/js/2.6063e899.chunk.js": "/apes-aiding-apes/static/js/2.6063e899.chunk.js",
+    "static/js/2.6063e899.chunk.js.map": "/apes-aiding-apes/static/js/2.6063e899.chunk.js.map",
+    "static/js/3.0c2d5f83.chunk.js": "/apes-aiding-apes/static/js/3.0c2d5f83.chunk.js",
+    "static/js/3.0c2d5f83.chunk.js.map": "/apes-aiding-apes/static/js/3.0c2d5f83.chunk.js.map",
+    "index.html": "/apes-aiding-apes/index.html",
+    "static/css/main.fa79b8ea.chunk.css.map": "/apes-aiding-apes/static/css/main.fa79b8ea.chunk.css.map",
+    "static/js/2.6063e899.chunk.js.LICENSE.txt": "/apes-aiding-apes/static/js/2.6063e899.chunk.js.LICENSE.txt",
+    "static/media/reset.css": "/apes-aiding-apes/static/media/font.617a0a92.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.86c25619.js",
+    "static/js/2.6063e899.chunk.js",
+    "static/css/main.fa79b8ea.chunk.css",
+    "static/js/main.f10d00bf.chunk.js"
+  ]
+}
