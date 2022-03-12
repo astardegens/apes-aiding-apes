@@ -398,7 +398,33 @@ function App () {
               color: "var(--primary-text)",
             }}
           >
-            This donation will be converted to USDT and sent to Ukraine Red Cross. 97.5% of the donation will be sent to the Astar Degen DAO fund and will be converted to USDT.
+            This donation will be going to the
+            <StyledLink target={"_blank"} href={"https://www.icrc.org/en/where-we-work/europe-central-asia/ukraine"}>
+            {" Red Cross in Ukraine"}
+              </StyledLink>.
+
+
+          </s.TextDescription>
+          <s.SpacerSmall />
+          <s.TextDescription
+            style={{
+              textAlign: "center",
+              color: "var(--primary-text)",
+            }}
+          >
+            97.5% of the donation will be sent to the Astar Degen DAO fund and converted to USDT for the donation.
+
+            Thank you for your kind and generous act!
+
+          </s.TextDescription>
+          <s.SpacerSmall />
+          <s.TextDescription
+            style={{
+              textAlign: "center",
+              color: "var(--primary-text)",
+            }}
+          >
+            There are 10 unique images in this collection
 
           </s.TextDescription>
         </s.Container>
