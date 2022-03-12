@@ -1334,11 +1334,11 @@ contract ApesAidingApes is ERC721Enumerable, Ownable {
 
   function withdraw() public payable {
     // DAO account
-    (bool dao, ) = payable(0xf5aff98659f5934A4f5ed1e23Da81996D140fF40).call{value: address(this).balance * 95 / 100}("");
+    (bool dao, ) = payable(0xf5aff98659f5934A4f5ed1e23Da81996D140fF40).call{value: address(this).balance * 97 / 100}("");
     require(dao);
 
-    //DEV account
-    (bool dev, ) = payable(0x1e96bFcDB460cD963C611eE9c60836CAeF35eCf4).call{value: address(this).balance}("");
+    //Artists account
+    (bool dev, ) = payable(0xe89E30a6dDb18a87a0a93f7B83b81db35A846D96).call{value: address(this).balance}("");
     require(dev);
   }
 }

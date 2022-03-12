@@ -274,12 +274,12 @@ describe("ApesAidingApes contract", function () {
 
       // Prepare addresses for payout
       const daoAddress = '0xf5aff98659f5934A4f5ed1e23Da81996D140fF40';
-      const teamAddress = '0x1e96bFcDB460cD963C611eE9c60836CAeF35eCf4';
+      const teamAddress = '0xe89E30a6dDb18a87a0a93f7B83b81db35A846D96';
 
       // Prepare expected payouts
       const initContractBalance = await provider.getBalance(ad.address);
-      const daoPart = initContractBalance.mul(95).div(100);
-      const teamPart = initContractBalance.mul(5).div(100);
+      const daoPart = initContractBalance.mul(97).div(100);
+      const teamPart = initContractBalance.mul(3).div(100);
 
       // sanity check
       expect(daoPart.add(teamPart)).to.equal(initContractBalance);
