@@ -3,7 +3,7 @@ const BigNumber = require('ethers').BigNumber;
 const provider = waffle.provider;
 
 
-describe("AstarDegens contract", function () {
+describe("ApesAidingApes contract", function () {
   let owner;
   let bob;
   let charlie;
@@ -14,8 +14,8 @@ describe("AstarDegens contract", function () {
 
   beforeEach(async function () {
     [owner, bob, charlie, ...addrs] = await ethers.getSigners();
-    const AstarDegens = await ethers.getContractFactory("AstarDegens");
-    ad = await AstarDegens.deploy("AstarDegens", "AD", not_revealed_uri);
+    const ApesAidingApes = await ethers.getContractFactory("ApesAidingApes");
+    ad = await ApesAidingApes.deploy("ApesAidingApes", "AD", not_revealed_uri);
     await ad.deployed();
 
     // Ensure contract is paused/disabled on deployment
@@ -35,7 +35,7 @@ describe("AstarDegens contract", function () {
     });
 
     it("Confirm degen price", async function () {
-      cost = ethers.utils.parseUnits('6', 0)
+      cost = ethers.utils.parseUnits('1', 0)
       const expectedCost = cost.mul(ethers.constants.WeiPerEther);
       expect(await ad.cost()).to.equal(expectedCost);
     });
@@ -133,35 +133,38 @@ describe("AstarDegens contract", function () {
 
     });
 
-    it("Bob fails to mints 6", async () => {
+    it("Bob fails to mints 11", async () => {
       const degenCost = await ad.cost();
       const tokenId = await ad.totalSupply();
 
-      await expect(ad.connect(bob).mint(6, { value: degenCost.mul(6), }))
-        .to.revertedWith("Degen tribe is max 5 apes");
+      await expect(ad.connect(bob).mint(11, { value: degenCost.mul(6), }))
+        .to.revertedWith("Max mint is 10");
     });
 
-    it("Bob fails to mints 5 plus 1", async () => {
+    it("Bob can mint 10 plus 1", async () => {
       const degenCost = await ad.cost();
       const tokenId = await ad.totalSupply();
 
       expect(
-        await ad.connect(bob).mint(5, {
-          value: degenCost.mul(5),
+        await ad.connect(bob).mint(10, {
+          value: degenCost.mul(10),
         })
       )
         .to.emit(ad, "Transfer")
-        .withArgs(ethers.constants.AddressZero, bob.address, tokenId.add('5'));
-      expect(await ad.totalSupply()).to.equal(5);
+        .withArgs(ethers.constants.AddressZero, bob.address, tokenId.add('10'));
+      expect(await ad.totalSupply()).to.equal(10);
 
-      // should fail to mint additional one in new mint call
-      await expect(ad.connect(bob).mint(1, { value: degenCost }))
-        .to.be.revertedWith("Your Degen tribe can't be over 5 strong");
-
-      expect(await ad.totalSupply()).to.equal(5);
+      expect(
+        await ad.connect(bob).mint(1, {
+          value: degenCost.mul(1),
+        })
+      )
+        .to.emit(ad, "Transfer")
+        .withArgs(ethers.constants.AddressZero, bob.address, tokenId.add('1'));
+      expect(await ad.totalSupply()).to.equal(11);
     });
 
-    it("Bob fails to mints 1 plus 5", async () => {
+    it("Bob can mint 1 plus 10", async () => {
       const degenCost = await ad.cost();
       const tokenId = await ad.totalSupply();
 
@@ -174,11 +177,15 @@ describe("AstarDegens contract", function () {
         .withArgs(ethers.constants.AddressZero, bob.address, tokenId.add('1'));
       expect(await ad.totalSupply()).to.equal(1);
 
-      // should fail to mint additional five in new mint call
-      await expect(ad.connect(bob).mint(5, { value: degenCost.mul(5) }))
-        .to.revertedWith("Your Degen tribe can't be over 5 strong");
+      expect(
+        await ad.connect(bob).mint(10, {
+          value: degenCost.mul(10),
+        })
+      )
+        .to.emit(ad, "Transfer")
+        .withArgs(ethers.constants.AddressZero, bob.address, tokenId.add('10'));
 
-      expect(await ad.totalSupply()).to.equal(1);
+      expect(await ad.totalSupply()).to.equal(11);
     });
 
     it("Bob fails to mints 2 with funds for 1", async () => {
@@ -271,13 +278,11 @@ describe("AstarDegens contract", function () {
 
       // Prepare expected payouts
       const initContractBalance = await provider.getBalance(ad.address);
-      const daoPart = initContractBalance.mul(70).div(100);
-      const teamPart = initContractBalance.mul(28).div(100);
-      const devPart = initContractBalance.sub(daoPart).sub(teamPart);
-      // sanity check
-      expect(daoPart.add(teamPart).add(devPart)).to.equal(initContractBalance);
+      const daoPart = initContractBalance.mul(95).div(100);
+      const teamPart = initContractBalance.mul(5).div(100);
 
-      const initOwnerBalance = await provider.getBalance(owner.address);
+      // sanity check
+      expect(daoPart.add(teamPart)).to.equal(initContractBalance);
 
       // Ensure that addresses don't have any initial balance
       expect(await provider.getBalance(daoAddress)).to.equal(0);
@@ -289,7 +294,6 @@ describe("AstarDegens contract", function () {
       // Ensure that distribution was as expected
       expect(await provider.getBalance(daoAddress)).to.equal(daoPart);
       expect(await provider.getBalance(teamAddress)).to.equal(teamPart);
-      expect(await provider.getBalance(owner.address)).to.equal(initOwnerBalance.add(devPart));
     });
   });
 
