@@ -1227,8 +1227,8 @@ contract ApesAidingApes is ERC721Enumerable, Ownable {
   uint256 public cost = 1 ether;
   uint256 public maxSupply = 10000;
   uint256 public maxMintAmount = 10;
-  bool public paused = true;
-  bool public revealed = false;
+  bool public paused = false;
+  bool public revealed = true;
   string public notRevealedUri;
 
   constructor(
