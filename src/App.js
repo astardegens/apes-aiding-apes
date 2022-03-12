@@ -120,7 +120,7 @@ function App() {
     SHOW_BACKGROUND: false,
   });
 
-  console.log("ShMonsters version 22.1.2")
+  console.log("Apes-aiding-apes version 0.0.1")
   const claimNFTs = () => {
     let cost = CONFIG.WEI_COST;
     let gasLimit = CONFIG.GAS_LIMIT;
