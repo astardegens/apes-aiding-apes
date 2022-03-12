@@ -94,7 +94,7 @@ export const StyledLink = styled.a`
   text-decoration: none;
 `;
 
-function App() {
+function App () {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
@@ -275,7 +275,7 @@ function App() {
                 </s.TextDescription>
                 <s.SpacerSmall />
                 {blockchain.account === "" ||
-                blockchain.smartContract === null ? (
+                  blockchain.smartContract === null ? (
                   <s.Container ai={"center"} jc={"center"}>
                     <s.TextDescription
                       style={{
@@ -398,9 +398,8 @@ function App() {
               color: "var(--primary-text)",
             }}
           >
-            We have set the gas limit to {CONFIG.GAS_LIMIT} for the contract to
-            successfully mint your NFT. We recommend that you don't lower the
-            gas limit.
+            This donation will be converted to USDT and sent to Ukraine Red Cross. 97.5% of the donation will be sent to the Astar Degen DAO fund and will be converted to USDT.
+
           </s.TextDescription>
         </s.Container>
       </s.Container>
