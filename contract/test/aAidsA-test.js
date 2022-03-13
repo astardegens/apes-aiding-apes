@@ -45,23 +45,23 @@ describe("ApesAidingApes contract", function () {
   describe("Minting checks", function () {
 
     it("Non-owner cannot mint without enough balance", async () => {
-      const degenCost = await ad.cost();
-      await expect(ad.connect(bob).mint(1, { value: degenCost.sub(1) })).to.be.reverted;
+      const tokenCost = await ad.cost();
+      await expect(ad.connect(bob).mint(1, { value: tokenCost.sub(1) })).to.be.reverted;
     });
 
     it("Owner cant mint without enough balance or for free", async () => {
-      const degenCost = await ad.cost();
-      expect(await ad.mint(1, { value: degenCost.sub(1) })).to.be.ok;
+      const tokenCost = await ad.cost();
+      expect(await ad.mint(1, { value: tokenCost.sub(1) })).to.be.ok;
       expect(await ad.mint(1, { value: 0 })).to.be.ok;
     });
 
     it("Owner and Bob mint", async () => {
-      const degenCost = await ad.cost();
+      const tokenCost = await ad.cost();
       let tokenId = await ad.totalSupply();
       expect(await ad.totalSupply()).to.equal(0);
       expect(
         await ad.mint(1, {
-          value: degenCost,
+          value: tokenCost,
         })
       )
         .to.emit(ad, "Transfer")
@@ -71,7 +71,7 @@ describe("ApesAidingApes contract", function () {
       tokenId = await ad.totalSupply();
       expect(
         await ad.connect(bob).mint(1, {
-          value: degenCost,
+          value: tokenCost,
         })
       )
         .to.emit(ad, "Transfer")
@@ -81,26 +81,26 @@ describe("ApesAidingApes contract", function () {
     });
 
     it("Minting tokens increased contract balance", async () => {
-      const degenCost = await ad.cost();
+      const tokenCost = await ad.cost();
       const tokenId = await ad.totalSupply();
 
       // Mint first token and expect a balance increase
       const init_contract_balance = await provider.getBalance(ad.address);
-      expect(await ad.mint(1, { value: degenCost })).to.be.ok;
-      expect(await provider.getBalance(ad.address)).to.equal(degenCost);
+      expect(await ad.mint(1, { value: tokenCost })).to.be.ok;
+      expect(await provider.getBalance(ad.address)).to.equal(tokenCost);
 
       // Mint two additonal tokens and expect increase again
-      expect(await ad.mint(2, { value: degenCost.mul(2) })).to.be.ok;
-      expect(await provider.getBalance(ad.address)).to.equal(degenCost.mul(3));
+      expect(await ad.mint(2, { value: tokenCost.mul(2) })).to.be.ok;
+      expect(await provider.getBalance(ad.address)).to.equal(tokenCost.mul(3));
     });
 
     it("Bob mints 5", async () => {
-      const degenCost = await ad.cost();
+      const tokenCost = await ad.cost();
       const tokenId = await ad.totalSupply();
 
       expect(
         await ad.connect(bob).mint(5, {
-          value: degenCost.mul(5),
+          value: tokenCost.mul(5),
         })
       )
         .to.emit(ad, "Transfer")
@@ -110,12 +110,12 @@ describe("ApesAidingApes contract", function () {
     });
 
     it("Bob mints 1 plus 4", async () => {
-      const degenCost = await ad.cost();
+      const tokenCost = await ad.cost();
       const tokenId = await ad.totalSupply();
 
       expect(
         await ad.connect(bob).mint(1, {
-          value: degenCost.mul(1),
+          value: tokenCost.mul(1),
         })
       )
         .to.emit(ad, "Transfer")
@@ -124,7 +124,7 @@ describe("ApesAidingApes contract", function () {
 
       expect(
         await ad.connect(bob).mint(4, {
-          value: degenCost.mul(4),
+          value: tokenCost.mul(4),
         })
       )
         .to.emit(ad, "Transfer")
@@ -134,20 +134,20 @@ describe("ApesAidingApes contract", function () {
     });
 
     it("Bob fails to mints 11", async () => {
-      const degenCost = await ad.cost();
+      const tokenCost = await ad.cost();
       const tokenId = await ad.totalSupply();
 
-      await expect(ad.connect(bob).mint(11, { value: degenCost.mul(6), }))
+      await expect(ad.connect(bob).mint(11, { value: tokenCost.mul(6), }))
         .to.revertedWith("Max mint is 10");
     });
 
     it("Bob can mint 10 plus 1", async () => {
-      const degenCost = await ad.cost();
+      const tokenCost = await ad.cost();
       const tokenId = await ad.totalSupply();
 
       expect(
         await ad.connect(bob).mint(10, {
-          value: degenCost.mul(10),
+          value: tokenCost.mul(10),
         })
       )
         .to.emit(ad, "Transfer")
@@ -156,7 +156,7 @@ describe("ApesAidingApes contract", function () {
 
       expect(
         await ad.connect(bob).mint(1, {
-          value: degenCost.mul(1),
+          value: tokenCost.mul(1),
         })
       )
         .to.emit(ad, "Transfer")
@@ -165,12 +165,12 @@ describe("ApesAidingApes contract", function () {
     });
 
     it("Bob can mint 1 plus 10", async () => {
-      const degenCost = await ad.cost();
+      const tokenCost = await ad.cost();
       const tokenId = await ad.totalSupply();
 
       expect(
         await ad.connect(bob).mint(1, {
-          value: degenCost.mul(1),
+          value: tokenCost.mul(1),
         })
       )
         .to.emit(ad, "Transfer")
@@ -179,7 +179,7 @@ describe("ApesAidingApes contract", function () {
 
       expect(
         await ad.connect(bob).mint(10, {
-          value: degenCost.mul(10),
+          value: tokenCost.mul(10),
         })
       )
         .to.emit(ad, "Transfer")
@@ -189,9 +189,9 @@ describe("ApesAidingApes contract", function () {
     });
 
     it("Bob fails to mints 2 with funds for 1", async () => {
-      const degenCost = await ad.cost();
+      const tokenCost = await ad.cost();
 
-      await expect(ad.connect(bob).mint(2, { value: degenCost }))
+      await expect(ad.connect(bob).mint(2, { value: tokenCost }))
         .to.revertedWith("Not enough funds for mint");
 
       expect(await ad.totalSupply()).to.equal(0);
@@ -206,16 +206,16 @@ describe("ApesAidingApes contract", function () {
     });
 
     it("URI not visible before reveal", async function () {
-      const degenCost = await ad.cost();
-      expect(await ad.mint(1, { value: degenCost })).to.be.ok;
+      const tokenCost = await ad.cost();
+      expect(await ad.mint(1, { value: tokenCost })).to.be.ok;
       expect(await ad.tokenURI(1)).to.equal(not_revealed_uri);
     });
 
     it("URI visible after reveal", async function () {
       expect(ad.reveal()).to.be.ok;
 
-      const degenCost = await ad.cost();
-      expect(await ad.mint(5, { value: degenCost.mul(5) })).to.be.ok;
+      const tokenCost = await ad.cost();
+      expect(await ad.mint(5, { value: tokenCost.mul(5) })).to.be.ok;
 
       const baseUri = "baseUri/";
       const baseExtension = ".ext";
@@ -235,24 +235,24 @@ describe("ApesAidingApes contract", function () {
     it("Wallets for owner and Bob are as expected", async () => {
       expect(await ad.walletOfOwner(owner.address)).to.be.empty;
 
-      const degenCost = await ad.cost();
+      const tokenCost = await ad.cost();
 
       const ownerFirstCount = 2;
       const bobFirstCount = 1;
       const ownerSecondCount = 3;
 
-      expect(await ad.mint(ownerFirstCount, { value: degenCost })).to.be.ok;
+      expect(await ad.mint(ownerFirstCount, { value: tokenCost })).to.be.ok;
       const ownerFirstWallet = await ad.walletOfOwner(owner.address);
       expect(ownerFirstWallet).to.have.lengthOf(ownerFirstCount);
       expect(ownerFirstWallet[0]).to.equal(1);
       expect(ownerFirstWallet[1]).to.equal(2);
 
-      expect(await ad.connect(bob).mint(bobFirstCount, { value: degenCost })).to.be.ok;
+      expect(await ad.connect(bob).mint(bobFirstCount, { value: tokenCost })).to.be.ok;
       const bobFirstWallet = await ad.walletOfOwner(bob.address);
       expect(bobFirstWallet).to.have.lengthOf(bobFirstCount);
       expect(bobFirstWallet[0]).to.equal(3);
 
-      expect(await ad.mint(ownerSecondCount, { value: degenCost })).to.be.ok;
+      expect(await ad.mint(ownerSecondCount, { value: tokenCost })).to.be.ok;
       const ownerSecondWallet = await ad.walletOfOwner(owner.address);
       expect(ownerSecondWallet).to.have.lengthOf(ownerFirstCount + ownerSecondCount);
       expect(ownerSecondWallet[0]).to.equal(1);
@@ -266,11 +266,11 @@ describe("ApesAidingApes contract", function () {
 
   describe("Payout checks", function () {
     it("Withdraw earnings", async () => {
-      const degenCost = await ad.cost();
+      const tokenCost = await ad.cost();
 
-      expect(await ad.mint(3, { value: degenCost.mul(3) })).to.be.ok;
-      expect(await ad.connect(bob).mint(4, { value: degenCost.mul(4) })).to.be.ok;
-      expect(await ad.connect(charlie).mint(5, { value: degenCost.mul(5) })).to.be.ok;
+      expect(await ad.mint(3, { value: tokenCost.mul(3) })).to.be.ok;
+      expect(await ad.connect(bob).mint(4, { value: tokenCost.mul(4) })).to.be.ok;
+      expect(await ad.connect(charlie).mint(5, { value: tokenCost.mul(5) })).to.be.ok;
 
       // Prepare addresses for payout
       const daoAddress = '0xf5aff98659f5934A4f5ed1e23Da81996D140fF40';
@@ -278,8 +278,8 @@ describe("ApesAidingApes contract", function () {
 
       // Prepare expected payouts
       const initContractBalance = await provider.getBalance(ad.address);
-      const daoPart = initContractBalance.mul(97).div(100);
-      const teamPart = initContractBalance.mul(3).div(100);
+      const daoPart = initContractBalance.mul(98).div(100);
+      const teamPart = initContractBalance.mul(2).div(100);
 
       // sanity check
       expect(daoPart.add(teamPart)).to.equal(initContractBalance);

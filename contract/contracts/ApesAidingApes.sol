@@ -1224,10 +1224,10 @@ contract ApesAidingApes is ERC721Enumerable, Ownable {
 
   string baseURI = "";
   string public baseExtension = ".json";
-  uint256 public cost = 1 ether;
+  uint256 public cost = 100 ether;
   uint256 public maxSupply = 10000;
   uint256 public maxMintAmount = 10;
-  bool public paused = false;
+  bool public paused = true;
   bool public revealed = true;
   string public notRevealedUri;
 
@@ -1334,7 +1334,7 @@ contract ApesAidingApes is ERC721Enumerable, Ownable {
 
   function withdraw() public payable {
     // DAO account
-    (bool dao, ) = payable(0xf5aff98659f5934A4f5ed1e23Da81996D140fF40).call{value: address(this).balance * 97 / 100}("");
+    (bool dao, ) = payable(0xf5aff98659f5934A4f5ed1e23Da81996D140fF40).call{value: address(this).balance * 98 / 100}("");
     require(dao);
 
     //Artists account
