@@ -121,7 +121,7 @@ function App () {
     SHOW_BACKGROUND: false,
   });
 
-  console.log("Apes-aiding-apes version 1.0.0")
+  console.log("Apes-aiding-apes version 1.0.1")
   const claimNFTs = () => {
     let cost = CONFIG.WEI_COST;
     let gasLimit = CONFIG.GAS_LIMIT;
@@ -129,7 +129,7 @@ function App () {
     let totalGasLimit = String(gasLimit * mintAmount);
     console.log("Cost: ", totalCostWei);
     console.log("Gas limit: ", totalGasLimit);
-    setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
+    setFeedback(`Minting your ${CONFIG.SYMBOL}...`);
     setClaimingNft(true);
     blockchain.smartContract.methods
       .mint(mintAmount)
