@@ -1,18 +1,18 @@
 {
-  "CONTRACT_ADDRESS": "0xd59fC6Bfd9732AB19b03664a45dC29B8421BDA9a",
-  "SCAN_LINK": "https://blockscout.com/shibuya/address/0xd59fC6Bfd9732AB19b03664a45dC29B8421BDA9a/contracts",
+  "CONTRACT_ADDRESS": "0x43139550284a3e6bA07896D7317242156b8f745e",
+  "SCAN_LINK": "https://blockscout.com/astar/address/0x43139550284a3e6bA07896D7317242156b8f745e/contracts",
   "NETWORK": {
-    "NAME": "Shibuya(TEST)",
-    "SYMBOL": "SHY",
-    "ID": 81
+    "NAME": "Astar",
+    "SYMBOL": "ASTR",
+    "ID": 592
   },
   "NFT_NAME": "Apes Aiding Apes",
   "SYMBOL": "PEACE",
   "MAX_SUPPLY": 10000,
-  "WEI_COST": 1000000000000000000,
-  "DISPLAY_COST": 1,
+  "WEI_COST": 100000000000000000000,
+  "DISPLAY_COST": 100,
   "GAS_LIMIT": 300000,
-  "MARKETPLACE": "ToftNFT - NA for Testnet",
-  "MARKETPLACE_LINK": "https://tofunft.com/",
+  "MARKETPLACE": "ToftNFT",
+  "MARKETPLACE_LINK": "https://tofunft.com/astar",
   "SHOW_BACKGROUND": true
 }

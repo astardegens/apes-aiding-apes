@@ -412,7 +412,7 @@ function App () {
               color: "var(--primary-text)",
             }}
           >
-            97.5% of the donation will be sent to the Astar Degen DAO fund and converted to USDT for the donation.
+            98% of the donation will be sent to the Astar Degen DAO fund and converted to USDT for the donation.
 
             Thank you for your kind and generous act!
 

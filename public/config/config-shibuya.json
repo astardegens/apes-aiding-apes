@@ -1,0 +1,18 @@
+{
+  "CONTRACT_ADDRESS": "0xd59fC6Bfd9732AB19b03664a45dC29B8421BDA9a",
+  "SCAN_LINK": "https://blockscout.com/shibuya/address/0xd59fC6Bfd9732AB19b03664a45dC29B8421BDA9a/contracts",
+  "NETWORK": {
+    "NAME": "Shibuya(TEST)",
+    "SYMBOL": "SHY",
+    "ID": 81
+  },
+  "NFT_NAME": "Apes Aiding Apes",
+  "SYMBOL": "PEACE",
+  "MAX_SUPPLY": 10000,
+  "WEI_COST": 1000000000000000000,
+  "DISPLAY_COST": 1,
+  "GAS_LIMIT": 300000,
+  "MARKETPLACE": "ToftNFT - NA for Testnet",
+  "MARKETPLACE_LINK": "https://tofunft.com/",
+  "SHOW_BACKGROUND": true
+}
